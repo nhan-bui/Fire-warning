@@ -8,11 +8,10 @@ from firebase_admin import messaging
 import firebase_admin
 from firebase_admin import credentials
 
-TOKEN = "dZc0l7UcTvaoT8F33cr0Ve:APA91bFv9KIRoP7zn4w598G3Ow9_9OPBp57SDwRGg2JaGUSSOriFdQlvMGkw0RW-3G-zzg9OZa8Mdblz2YHrW8Iob9lbNTh6mPGTlX7Mktb0sgtowTcdOsF1dFOREN61q_376ij0a0MA"
-
+TOKEN = "your token"
 def auto_mail(receiver_email, frame):
-    sender_email = 'tnhan1901.work@gmail.com'
-    sender_password = 'ctddvjxhycfbpkwb'
+    sender_email = 'sendemail'
+    sender_password = 'your token'
 
     # Thông tin người nhận email
 
@@ -58,7 +57,7 @@ def plot_box(image, xyxy, cls):
 
 
 class Notification():
-    def __init__(self, json_path, token, title = "FIREWARNING", body = "CHÁY"):
+    def __init__(self, json_path, token, title="FIREWARNING", body="CHÁY"):
         self.json_path = json_path
         self.token = token
         self.title = title
@@ -74,7 +73,7 @@ class Notification():
         print("Đã gửi", response)
 
 def process_frame(frame):
-        auto_mail("nhantrong618@gmail.com", frame)
+        auto_mail("receive email", frame)
 
 if __name__ == "__main__":
     # image = cv2.imread('test.jpg')
