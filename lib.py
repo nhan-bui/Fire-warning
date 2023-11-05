@@ -9,8 +9,12 @@ import firebase_admin
 from firebase_admin import credentials
 
 TOKEN = "dzGV42xAQVSGIFHzBY-mFo:APA91bGgawNwBt4okVtLncZ3VhvnmTGPjpcx2qE4fhRnhiSTgHcXjYqFFjRklQxbg6WkMS4ftWfZZ0B-cdjYu5skIPutCTQvoaHBuOwNbrEfV0RuDc1fFblZU6XgvYh6BdaWJBHOdPyO"
+TOKEN_LIST = [
+              "dZc0l7UcTvaoT8F33cr0Ve:APA91bFv9KIRoP7zn4w598G3Ow9_9OPBp57SDwRGg2JaGUSSOriFdQlvMGkw0RW-3G-zzg9OZa8Mdblz2YHrW8Iob9lbNTh6mPGTlX7Mktb0sgtowTcdOsF1dFOREN61q_376ij0a0MA",
+              "cYrU-ufwS8-9EMCb-W06b9:APA91bHuCySUB9X-PJtnRo9UWzG36GpQdjgou7Bhe6bNpIieCKn_2A_JqTKLDPRirHZ_l3KmSwR3tYzwTi2i-eJS126MIPEZTbywe5KlF_9hS9T1hV4lgdMKNc4-IQSF-9kkZ4mlcd4h"
+              ]
 DATA = {
-        "image": "https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg",  # Thêm URL ảnh vào phần dữ liệu tùy chỉnh
+        "imageUrl": "https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg",  # Thêm URL ảnh vào phần dữ liệu tùy chỉnh
     }
 
 def auto_mail(receiver_email, frame):
@@ -67,15 +71,25 @@ class Notification():
         self.title = title
         self.body = body
         self.data = data
-        self.message = messaging.Message(notification=messaging.Notification(title=self.title, body=self.body, image="https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg"), token=self.token, data=self.data)
+        self.message = messaging.Message(notification=messaging.Notification(title=self.title, body=self.body, image="https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg"),
+                                         token=self.token, data=DATA)
         self.cred = credentials.Certificate(self.json_path)
         self.set()
+
+    def set_token(self, tk):
+        self.message = messaging.Message(notification=messaging.Notification(title=self.title, body=self.body, image="https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg"),
+                                         token=tk, data=DATA)
     def set(self):
         firebase_admin.initialize_app(self.cred)
 
     def send(self):
         response = messaging.send(self.message)
         print("Đã gửi", response)
+
+def notify_user(user_list: list, notification: Notification):
+    for token in user_list:
+        notification.set_token(token)
+        notification.send()
 
 def process_frame(frame):
         auto_mail("nhantrong618@gmail.com", frame)
@@ -88,6 +102,7 @@ if __name__ == "__main__":
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
     x = Notification(json_path="new.json", token=TOKEN)
+
     for i in range(3):
-        x.send()
+        notify_user(TOKEN_LIST, x)
 
