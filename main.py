@@ -20,8 +20,8 @@ if __name__ == "__main__":
             frame = plot_box(frame, xyxy, cls)
             cv2.imshow("Camera", frame)
             if len(cls) - cls.sum() > 0:
-                frame_thread = threading.Thread(target=process_frame, args=(frame,))
-                frame_thread.start()
+                # frame_thread = threading.Thread(target=process_frame, args=(frame,))
+                # frame_thread.start()
                 notify_thread = threading.Thread(target=notify.send, args=())
                 notify_thread.start()
 

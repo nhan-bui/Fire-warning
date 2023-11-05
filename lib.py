@@ -8,10 +8,14 @@ from firebase_admin import messaging
 import firebase_admin
 from firebase_admin import credentials
 
-TOKEN = "your token"
+TOKEN = "dzGV42xAQVSGIFHzBY-mFo:APA91bGgawNwBt4okVtLncZ3VhvnmTGPjpcx2qE4fhRnhiSTgHcXjYqFFjRklQxbg6WkMS4ftWfZZ0B-cdjYu5skIPutCTQvoaHBuOwNbrEfV0RuDc1fFblZU6XgvYh6BdaWJBHOdPyO"
+DATA = {
+        "image": "https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg",  # Thêm URL ảnh vào phần dữ liệu tùy chỉnh
+    }
+
 def auto_mail(receiver_email, frame):
-    sender_email = 'sendemail'
-    sender_password = 'your token'
+    sender_email = 'tnhan1901.work@gmail.com'
+    sender_password = 'ctddvjxhycfbpkwb'
 
     # Thông tin người nhận email
 
@@ -57,12 +61,13 @@ def plot_box(image, xyxy, cls):
 
 
 class Notification():
-    def __init__(self, json_path, token, title="FIREWARNING", body="CHÁY"):
+    def __init__(self, json_path, token, title = "FIREWARNING", body = "CHÁY", data=DATA):
         self.json_path = json_path
         self.token = token
         self.title = title
         self.body = body
-        self.message = messaging.Message(notification=messaging.Notification(title=self.title, body=self.body), token=self.token)
+        self.data = data
+        self.message = messaging.Message(notification=messaging.Notification(title=self.title, body=self.body, image="https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg"), token=self.token, data=self.data)
         self.cred = credentials.Certificate(self.json_path)
         self.set()
     def set(self):
@@ -73,7 +78,8 @@ class Notification():
         print("Đã gửi", response)
 
 def process_frame(frame):
-        auto_mail("receive email", frame)
+        auto_mail("nhantrong618@gmail.com", frame)
+
 
 if __name__ == "__main__":
     # image = cv2.imread('test.jpg')
@@ -82,7 +88,6 @@ if __name__ == "__main__":
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
     x = Notification(json_path="new.json", token=TOKEN)
-    x.set()
-    for i in range(10):
+    for i in range(3):
         x.send()
 
