@@ -8,11 +8,8 @@ from firebase_admin import messaging
 import firebase_admin
 from firebase_admin import credentials
 
-TOKEN = "dzGV42xAQVSGIFHzBY-mFo:APA91bGgawNwBt4okVtLncZ3VhvnmTGPjpcx2qE4fhRnhiSTgHcXjYqFFjRklQxbg6WkMS4ftWfZZ0B-cdjYu5skIPutCTQvoaHBuOwNbrEfV0RuDc1fFblZU6XgvYh6BdaWJBHOdPyO"
-TOKEN_LIST = [
-              "dZc0l7UcTvaoT8F33cr0Ve:APA91bFv9KIRoP7zn4w598G3Ow9_9OPBp57SDwRGg2JaGUSSOriFdQlvMGkw0RW-3G-zzg9OZa8Mdblz2YHrW8Iob9lbNTh6mPGTlX7Mktb0sgtowTcdOsF1dFOREN61q_376ij0a0MA",
-              "cYrU-ufwS8-9EMCb-W06b9:APA91bHuCySUB9X-PJtnRo9UWzG36GpQdjgou7Bhe6bNpIieCKn_2A_JqTKLDPRirHZ_l3KmSwR3tYzwTi2i-eJS126MIPEZTbywe5KlF_9hS9T1hV4lgdMKNc4-IQSF-9kkZ4mlcd4h"
-              ]
+TOKEN = "ctXxzq2DS7OpdXW3U_6Krg:APA91bFji_sLQ6o-Wh18wvRpB65z9BefZ2dDqpfNTUKoc7JOBvWeXRtIHx837G2gHsqyQVJ6ZQdiF97BR64BFdjsU-kDA-RtwH_60p9VZLMLDbZk5IPDqkGh6ACTB1P47v97v-BZmRgh"
+TOKEN_LIST = [TOKEN]
 DATA = {
         "imageUrl": "https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg",  # Thêm URL ảnh vào phần dữ liệu tùy chỉnh
     }
@@ -104,5 +101,6 @@ if __name__ == "__main__":
     x = Notification(json_path="new.json", token=TOKEN)
 
     for i in range(3):
-        notify_user(TOKEN_LIST, x)
+        notify_user(user_list=TOKEN_LIST, notification=x)
+
 
