@@ -14,6 +14,7 @@ DATA = {
         "imageUrl": "https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg",  # Thêm URL ảnh vào phần dữ liệu tùy chỉnh
     }
 
+
 def auto_mail(receiver_email, frame):
     sender_email = 'tnhan1901.work@gmail.com'
     sender_password = 'ctddvjxhycfbpkwb'
@@ -61,7 +62,7 @@ def plot_box(image, xyxy, cls):
     return image
 
 
-class Notification():
+class Notification:
     def __init__(self, json_path, token, title = "FIREWARNING", body = "CHÁY", data=DATA):
         self.json_path = json_path
         self.token = token
@@ -76,6 +77,7 @@ class Notification():
     def set_token(self, tk):
         self.message = messaging.Message(notification=messaging.Notification(title=self.title, body=self.body, image="https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg"),
                                          token=tk, data=DATA)
+
     def set(self):
         firebase_admin.initialize_app(self.cred)
 
@@ -83,13 +85,25 @@ class Notification():
         response = messaging.send(self.message)
         print("Đã gửi", response)
 
+
 def notify_user(user_list: list, notification: Notification):
     for token in user_list:
         notification.set_token(token)
         notification.send()
 
+
 def process_frame(frame):
-        auto_mail("nhantrong618@gmail.com", frame)
+    auto_mail("nhantrong618@gmail.com", frame)
+
+
+def process_cam(cap, model, queue):
+    ret, frame = cap.read()
+    result = model.predict(source=frame, conf=0.5)
+    boxes = result[0].boxes
+    xyxy = boxes.xyxy.cpu().numpy()
+    cls = boxes.cls.cpu().numpy()
+    frame = plot_box(frame, xyxy, cls)
+    queue.put((frame, cls))
 
 
 if __name__ == "__main__":
