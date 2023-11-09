@@ -3,15 +3,25 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 import cv2
-import numpy as np
 from firebase_admin import messaging
 import firebase_admin
 from firebase_admin import credentials
 
 TOKEN = "ctXxzq2DS7OpdXW3U_6Krg:APA91bFji_sLQ6o-Wh18wvRpB65z9BefZ2dDqpfNTUKoc7JOBvWeXRtIHx837G2gHsqyQVJ6ZQdiF97BR64BFdjsU-kDA-RtwH_60p9VZLMLDbZk5IPDqkGh6ACTB1P47v97v-BZmRgh"
 TOKEN_LIST = [TOKEN]
-DATA = {
-        "imageUrl": "https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg",  # Thêm URL ảnh vào phần dữ liệu tùy chỉnh
+DATA1 = {
+        "imageUrl":"https://scontent.fhan14-3.fna.fbcdn.net/v/t1.15752-9/377234734_3413410322303677_8758365910479124703_n.png?_nc_cat=104&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=KnI-b-P5BGIAX9MqraU&_nc_ht=scontent.fhan14-3.fna&oh=03_AdTS1-qHoSo7G0yG4-XLTuCaZT78UVTihm9lOJh-BNn5rQ&oe=65744BAB",  # Thêm URL ảnh vào phần dữ liệu tùy chỉnh
+    }
+DATA2 = {
+    "imageUrl":"https://scontent.fhan20-1.fna.fbcdn.net/v/t1.15752-9/370100027_257199114015509_1128683649524341392_n.png?_nc_cat=100&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeH290_O0GbqyaZl_dy-jr44uyHsYZeUUPi7Iexhl5RQ-LGJFHIf3MfshYqCAjsxqeew7SdqqV3gzFsTCbKijzYl&_nc_ohc=khUkIl6A0KoAX_isPl9&_nc_ht=scontent.fhan20-1.fna&oh=03_AdRZR1NzL516JxmDug1rrQzHG35imNAFltapiNbFDKSHdQ&oe=657465F2"
+}
+
+DATA3 = {
+    "imageUrl":"https://scontent.fhan20-1.fna.fbcdn.net/v/t1.15752-9/371473185_1475407749964947_8294815324886515897_n.png?_nc_cat=102&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeEdP7vprJkf2_jcUkkSKu9etFVnvgvvxbu0VWe-C-_Fu_wSfr-LRNbjhRwbLuBBHh92KfCW_e0Sv_C18fDYTt1f&_nc_ohc=r95JODmCoz0AX_Sar80&_nc_ht=scontent.fhan20-1.fna&oh=03_AdRAENkDMrSf_a8nBEo6rCmTFoXilCsKotzdJ8WmjtDw6Q&oe=657450B0"
+}
+
+DATA4 = {
+        "imageUrl": "https://scontent.fhan20-1.fna.fbcdn.net/v/t1.15752-9/398326633_415580800821187_7809818021847975064_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeE08Hpavs6q8Gn7awKplYEhaW4fMaw5Yftpbh8xrDlh-1mHTPb9eLFRFsViCml8kDPXfOiTx28H-rRiZsIup91z&_nc_ohc=-f7k66nU_bkAX9CDLSq&_nc_oc=AQmMxt33WlGk5q5OyPFi2_IGsfICgZI4amj6S23FBem4cxq--5LHVJo1usZP2AH_qF30pGjjZAZexkO28cxkzPzA&_nc_ht=scontent.fhan20-1.fna&oh=03_AdQvaEBMX54NNe-0zErmksjHZcQ8bzND08jP3z4y1xSAIQ&oe=65744D23",  # Thêm URL ảnh vào phần dữ liệu tùy chỉnh
     }
 
 
@@ -63,20 +73,26 @@ def plot_box(image, xyxy, cls):
 
 
 class Notification:
-    def __init__(self, json_path, token, title = "FIREWARNING", body = "CHÁY", data=DATA):
+    def __init__(self, json_path, token, title="Cảnh báo cháy", body="CHÁY", data=DATA4):
         self.json_path = json_path
         self.token = token
         self.title = title
         self.body = body
         self.data = data
         self.message = messaging.Message(notification=messaging.Notification(title=self.title, body=self.body, image="https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg"),
-                                         token=self.token, data=DATA)
+                                         token=self.token, data=self.data)
         self.cred = credentials.Certificate(self.json_path)
         self.set()
 
     def set_token(self, tk):
         self.message = messaging.Message(notification=messaging.Notification(title=self.title, body=self.body, image="https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg"),
-                                         token=tk, data=DATA)
+                                         token=tk, data=self.data)
+
+    def set_message(self, body, data):
+        self.body = body
+        self.data = data
+        self.message = messaging.Message(notification=messaging.Notification(title=self.title, body=self.body, image="https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg"),
+                                         token=TOKEN, data=self.data)
 
     def set(self):
         firebase_admin.initialize_app(self.cred)
