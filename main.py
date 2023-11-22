@@ -7,7 +7,7 @@ import numpy as np
 
 if __name__ == "__main__":
     cap = cv2.VideoCapture(0)
-    notify = Notification(json_path="new.json", token=TOKEN)
+    notify = Notification(json_path="new.json", token=TOKEN_LIST[0])
     model = YOLO('C:/Users/Truongpc/PycharmProjects/FireWaring/NewFW.pt')
     num_frame = 0
     rtsp1 = "rtsp://admin:tsinb123@thptymb.ddns.net:554"

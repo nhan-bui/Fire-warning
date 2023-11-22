@@ -7,8 +7,8 @@ from firebase_admin import messaging
 import firebase_admin
 from firebase_admin import credentials
 
-TOKEN = "ctXxzq2DS7OpdXW3U_6Krg:APA91bFji_sLQ6o-Wh18wvRpB65z9BefZ2dDqpfNTUKoc7JOBvWeXRtIHx837G2gHsqyQVJ6ZQdiF97BR64BFdjsU-kDA-RtwH_60p9VZLMLDbZk5IPDqkGh6ACTB1P47v97v-BZmRgh"
-TOKEN_LIST = [TOKEN]
+
+TOKEN_LIST = ["your token list"]
 DATA1 = {
         "imageUrl":"https://scontent.fhan14-3.fna.fbcdn.net/v/t1.15752-9/377234734_3413410322303677_8758365910479124703_n.png?_nc_cat=104&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=KnI-b-P5BGIAX9MqraU&_nc_ht=scontent.fhan14-3.fna&oh=03_AdTS1-qHoSo7G0yG4-XLTuCaZT78UVTihm9lOJh-BNn5rQ&oe=65744BAB",  # Thêm URL ảnh vào phần dữ liệu tùy chỉnh
     }
@@ -26,8 +26,8 @@ DATA4 = {
 
 
 def auto_mail(receiver_email, frame):
-    sender_email = 'tnhan1901.work@gmail.com'
-    sender_password = 'ctddvjxhycfbpkwb'
+    sender_email = 'sender email'
+    sender_password = 'sender_token'
 
     # Thông tin người nhận email
 
@@ -92,7 +92,7 @@ class Notification:
         self.body = body
         self.data = data
         self.message = messaging.Message(notification=messaging.Notification(title=self.title, body=self.body, image="https://pcccpnn.com/wp-content/uploads/2022/08/PNN-1.jpg"),
-                                         token=TOKEN, data=self.data)
+                                         token=self.token, data=self.data)
 
     def set(self):
         firebase_admin.initialize_app(self.cred)
@@ -128,7 +128,7 @@ if __name__ == "__main__":
     # cv2.imshow("Rectangle", image)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
-    x = Notification(json_path="new.json", token=TOKEN)
+    x = Notification(json_path="new.json", token=TOKEN_LIST[0])
 
     for i in range(3):
         notify_user(user_list=TOKEN_LIST, notification=x)
