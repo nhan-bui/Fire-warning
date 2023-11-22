@@ -1,6 +1,6 @@
 # Tên dự án
 
-Mô tả ngắn về dự án của bạn.
+Phát hiện đám cháy qua camera an ninh và gửi thông báo về điện thoại và email
 
 ## Cài đặt
 
@@ -30,6 +30,7 @@ Mô tả cấu trúc thư mục dự án của bạn.
 
 ## Một số nguồn tham khảo thêm
 `https://docs.ultralytics.com/models/yolov8/`
+
 `https://viblo.asia/p/tim-hieu-ve-yolo-trong-bai-toan-real-time-object-detection-yMnKMdvr57P`
 
 
