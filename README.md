@@ -4,16 +4,12 @@ Phát hiện đám cháy qua camera an ninh và gửi thông báo về điện t
 
 ## Cài đặt
 
-Hướng dẫn cài đặt dự án của bạn.
-
 1. Clone repository này: `git clone https://github.com/nhan-bui/Fire-warning`
 2. Di chuyển vào thư mục dự án: `cd repository`
 3. Cài đặt các thư viện sử dụng: `pip install -r requirements.txt`
 
 
 ## Cấu trúc thư mục
-
-Mô tả cấu trúc thư mục dự án của bạn.
 
 - `main.py`: Mã nguồn chạy phần mềm.
 - `lib.py`: Chứa các tham số và thư viện tự định nghĩa.
