@@ -1,4 +1,4 @@
-# Tên dự án
+# Fire waring
 
 Phát hiện đám cháy qua camera an ninh và gửi thông báo về điện thoại và email
 
