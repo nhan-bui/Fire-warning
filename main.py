@@ -5,14 +5,15 @@ import threading
 import queue
 import numpy as np
 
+
 if __name__ == "__main__":
     cap = cv2.VideoCapture(0)
     notify = Notification(json_path="new.json", token=TOKEN_LIST[0])
-    model = YOLO('C:/Users/Truongpc/PycharmProjects/FireWaring/NewFW.pt')
+    model = YOLO('NewFW.pt')
     num_frame = 0
-    rtsp1 = "rtsp://admin:tsinb123@thptymb.ddns.net:554"
-    rtsp2 = "rtsp://admin:tsinb123@thptymb.ddns.net:555"
-    rtsp3 = "rtsp://admin:tsinb123@thptymb.ddns.net:556"
+    rtsp1 = "your rtsp link"
+    rtsp2 = "your rtsp link"
+    rtsp3 = "your rtsp link"
     rtsp4 = 0
     cap1 = cv2.VideoCapture(rtsp1)
     cap2 = cv2.VideoCapture(rtsp2)
