@@ -18,7 +18,7 @@ if __name__ == "__main__":
     cap3 = cv2.VideoCapture(rtsp3)
     cap4 = cv2.VideoCapture(rtsp4)
     model = YOLO('C:/Users/Truongpc/PycharmProjects/FireWaring/NewFW.pt')
-    notify = Notification(json_path="new.json", token=TOKEN)
+    notify = Notification(json_path="new.json", token=TOKEN_LIST[0])
     while True:
         result_queue1 = queue.Queue()
         thread = threading.Thread(target=process_cam, args=(cap1, model, result_queue1))

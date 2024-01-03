@@ -8,7 +8,7 @@ import firebase_admin
 from firebase_admin import credentials
 
 
-TOKEN_LIST = ["your token list"]
+TOKEN_LIST = ["ctXxzq2DS7OpdXW3U_6Krg:APA91bFji_sLQ6o-Wh18wvRpB65z9BefZ2dDqpfNTUKoc7JOBvWeXRtIHx837G2gHsqyQVJ6ZQdiF97BR64BFdjsU-kDA-RtwH_60p9VZLMLDbZk5IPDqkGh6ACTB1P47v97v-BZmRgh"]
 DATA1 = {
         "imageUrl":"https://scontent.fhan14-3.fna.fbcdn.net/v/t1.15752-9/377234734_3413410322303677_8758365910479124703_n.png?_nc_cat=104&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=KnI-b-P5BGIAX9MqraU&_nc_ht=scontent.fhan14-3.fna&oh=03_AdTS1-qHoSo7G0yG4-XLTuCaZT78UVTihm9lOJh-BNn5rQ&oe=65744BAB",  # Thêm URL ảnh vào phần dữ liệu tùy chỉnh
     }
