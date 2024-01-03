@@ -24,6 +24,9 @@ if __name__ == "__main__":
                 notify_thread = threading.Thread(target=notify_user, args=(TOKEN_LIST, notify))
                 notify_thread.start()
 
+            if cv2.waitKey(1) == 27:
+                break
+
     except Exception as e:
         print(e)
 
